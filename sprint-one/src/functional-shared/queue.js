@@ -2,8 +2,9 @@
 
 var Queue = function() {
   var queue = {
-    firstIndex: 0,
-    nextIndex: 0,
+    _storage: {},
+    _firstIndex: 0,
+    _nextIndex: 0,
   };
 
   // extends queue object with methods in queueMethods
@@ -14,16 +15,16 @@ var Queue = function() {
 
 var queueMethods = {
   enqueue: function (value) {
-    this[this.nextIndex] = value;
-    this.nextIndex += 1;
+    this._storage[this._nextIndex] = value;
+    this._nextIndex += 1;
     return this.size();
   },
 
   dequeue: function () {
     if (this.size() > 0) {
-      var removedValue = this[this.firstIndex];
-      delete this[this.firstIndex];
-      this.firstIndex += 1;
+      var removedValue = this._storage[this._firstIndex];
+      delete this._storage[this._firstIndex];
+      this._firstIndex += 1;
       return removedValue;
     } else {
       return;
@@ -31,7 +32,7 @@ var queueMethods = {
   },
 
   size: function () {
-    return this.nextIndex - this.firstIndex;
+    return this._nextIndex - this._firstIndex;
   },
 };
 

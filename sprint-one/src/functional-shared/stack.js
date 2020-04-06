@@ -2,7 +2,8 @@
 
 var Stack = function() {
   var stack = {
-    nextIndex: 0,
+    _storage: {},
+    _nextIndex: 0,
   };
 
   // extends stack object with methods in stackMethods
@@ -13,16 +14,16 @@ var Stack = function() {
 
 var stackMethods = {
   push: function (value) {
-    this[this.nextIndex] = value;
-    this.nextIndex += 1;
+    this._storage[this._nextIndex] = value;
+    this._nextIndex += 1;
     return this.size();
   },
 
   pop: function () {
     if (this.size() > 0) {
-      var removedValue = this[this.nextIndex - 1];
-      delete this[this.nextIndex - 1];
-      this.nextIndex -= 1;
+      var removedValue = this._storage[this._nextIndex - 1];
+      delete this._storage[this._nextIndex - 1];
+      this._nextIndex -= 1;
       return removedValue;
     } else {
       return;
@@ -30,7 +31,7 @@ var stackMethods = {
   },
 
   size: function () {
-    return this.nextIndex;
+    return this._nextIndex;
   },
 };
 
