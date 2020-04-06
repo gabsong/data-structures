@@ -1,7 +1,29 @@
+'use strict';
+
 class Stack {
-  // Hey! Rewrite in the new style. Your code will wind up looking very similar,
-  // but try not not reference your old code in writing the new style.
   constructor() {
+    this._storage = {};
+    this._nextIndex = 0;
   }
 
+  push (value) {
+    this._storage[this._nextIndex] = value;
+    this._nextIndex += 1;
+    return this.size();
+  }
+
+  pop () {
+    if (this.size() > 0) {
+      const removedValue = this._storage[this._nextIndex - 1];
+      delete this._storage[this._nextIndex - 1];
+      this._nextIndex -= 1;
+      return removedValue;
+    } else {
+      return;
+    }
+  }
+
+  size () {
+    return this._nextIndex;
+  }
 }
