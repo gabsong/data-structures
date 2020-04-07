@@ -1,19 +1,36 @@
-var Tree = function(value) {
-  var newTree = {};
-  newTree.value = value;
+'use strict';
 
-  // your code here
-  newTree.children = null;  // fix me
+// Functional-shared class instantiation pattern
+const Tree = function(value) {
+  const newTree = {};
+  newTree.value = value;
+  newTree.children = [];
+
+  _.extend(newTree, treeMethods);
 
   return newTree;
 };
 
-var treeMethods = {};
+const treeMethods = {};
 
 treeMethods.addChild = function(value) {
+  const child = new Tree(value);
+  this.children.push(child);
 };
 
 treeMethods.contains = function(target) {
+  if (this.value === target) {
+    return true;
+  } else {
+    // depth-first search
+    for (let i = 0; i < this.children.length; i++) {
+      if (this.children[i].contains(target)) {
+        return true;
+      }
+    }
+  }
+
+  return false;
 };
 
 
